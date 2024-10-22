@@ -1,0 +1,20 @@
+{
+  "name": "flicker",
+  "version": "1.0.0",
+  "description": "Flicker is people connection platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "keywords": [
+    "node.js",
+    "JavaScript"
+  ],
+  "author": "Nida Waheed",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
