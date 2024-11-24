@@ -2,13 +2,15 @@
 const express = require("express");
 const app = express();
 const bcrypt = require("bcrypt");
-
+const jwt = require("jsonwebtoken");
 const { connectDb } = require("./config/database");
 const { validateSignUpData } = require("./utils/validation");
 const { User } = require("./models/user");
 const { userAuth } = require("./middlewares/auth");
+const cookieParser = require("cookie-parser");
 
 app.use(express.json());
+app.use(cookieParser());
 //post data to  mongoDB dynamically
 app.post("/signup", async (req, res) => {
   try {
@@ -16,7 +18,7 @@ app.post("/signup", async (req, res) => {
     validateSignUpData(req);
 
     //Encrypt the data
-    const { firstName, password } = req.body;
+    const { firstName, lastName, emailId, password } = req.body;
     const passwordHash = await bcrypt.hash(password, 10);
     //create new instance of user model
 
@@ -41,11 +43,11 @@ app.post("/signIn", async (req, res) => {
 
     if (!user) throw new Error("Invalid credentials");
     const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (isPasswordValid) res.send("Login Successfully");
-    else throw new Error("Invalid credentials");
+    if (!isPasswordValid) throw new Error("Invalid credentials");
 
     //create JWT token
     const token = await jwt.sign({ _id: user._id }, "Flicke@Tinder$790");
+
     res.cookie("token", token);
     res.send("Login Successfully");
   } catch (err) {
