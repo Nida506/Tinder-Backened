@@ -52,7 +52,7 @@ authRouter.post("/signIn", async (req, res) => {
     const user = await User.findOne({ emailId: emailId });
 
     if (!user) throw new Error("Invalid credentials");
-    const isPasswordValid = await user.validatePassword;
+    const isPasswordValid = await user.validatePassword(password);
     if (!isPasswordValid) throw new Error("Invalid credentials");
 
     //create JWT token
