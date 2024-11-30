@@ -6,7 +6,7 @@ const { User } = require("../models/user");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
 
-//get profile api
+//get user own profile , api
 profileRouter.get("/profile/view", userAuth, async (req, res) => {
   try {
     console.log(req);
@@ -17,7 +17,7 @@ profileRouter.get("/profile/view", userAuth, async (req, res) => {
   }
 });
 
-//edit profile api
+//edit user own profile ,  api
 profileRouter.get("/profile/edit", userAuth, async (req, res) => {
   try {
     if (!validateEditProfileData(req)) throw new Error("Invalid edit  request");
@@ -33,7 +33,7 @@ profileRouter.get("/profile/edit", userAuth, async (req, res) => {
   }
 });
 
-//password forget api
+//password forgot api
 profileRouter.get("/profile/forgotPassword", async (req, res) => {
   try {
     //validat email
