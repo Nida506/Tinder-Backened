@@ -27,7 +27,7 @@ requestRouter.post(
 
       // // validate the to which user send request is in the DB
       const toUser = await User.findById(toUserId);
-      console.log(toUser);
+
       if (!toUser) {
         return res.status(404).json({
           message: "User not found",
@@ -66,7 +66,6 @@ requestRouter.post(
         data,
       });
     } catch (err) {
-      console.log(err);
       res.status(400).send("ERROR : " + err.message);
     }
   }
