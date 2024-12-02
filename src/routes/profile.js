@@ -17,7 +17,7 @@ profileRouter.get("/profile/view", userAuth, async (req, res) => {
 });
 
 //edit user own profile ,  api
-profileRouter.get("/profile/edit", userAuth, async (req, res) => {
+profileRouter.patch("/profile/edit", userAuth, async (req, res) => {
   try {
     if (!validateEditProfileData(req)) throw new Error("Invalid edit  request");
     const loggedInUser = req.user;
