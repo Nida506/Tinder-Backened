@@ -15,12 +15,14 @@ const userSchema = new mongoose.Schema(
     },
     emailId: {
       type: String,
+      // require: true,
       unique: true,
       lowercase: true,
       trim: true,
     },
     password: {
       type: String,
+      // require: true,
     },
     age: {
       type: String,

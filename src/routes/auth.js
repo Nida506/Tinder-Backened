@@ -38,8 +38,12 @@ authRouter.post("/signup", async (req, res) => {
       skills,
     });
     // save user in database
-    await user.save();
-    res.send("User added successfully");
+    const savedUser = await user.save();
+    //when user sign up for direct sign in cookies send to browser for storage
+    const token = await savedUser.getJWT();
+    //expires cookies in 8 hours
+    res.cookie("token", token, { expires: new Date(Date.now() + 8 * 3600000) });
+    res.json({ message: "User added successfully", data: savedUser });
   } catch (err) {
     res.status(400).send("ERROR : " + err.message);
   }
@@ -57,8 +61,8 @@ authRouter.post("/signIn", async (req, res) => {
 
     //create JWT token
     const token = await user.getJWT();
-
-    res.cookie("token", token);
+    // expires cookies in 8 hours
+    res.cookie("token", token, { expires: new Date(Date.now() + 8 * 3600000) });
     res.json(user);
   } catch (err) {
     res.status(400).send("ERROR : " + err.message);
