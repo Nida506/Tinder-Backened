@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema(
     gender: {
       type: String,
       validate(value) {
-        if (!["male", "female", "others"].includes(value)) {
+        if (!["Male", "Female", "Others"].includes(value)) {
           throw new Error("Gender data is not valid");
         }
       },
@@ -39,7 +39,7 @@ const userSchema = new mongoose.Schema(
     photoUrl: {
       type: String,
       default:
-        "https://www.google.com/imgres?q=images&imgurl=https%3A%2F%2Fplus.unsplash.com%2Fpremium_photo-1664474619075-644dd191935f%3Ffm%3Djpg%26q%3D60%26w%3D3000%26ixlib%3Drb-4.0.3%26ixid%3DM3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%253D&imgrefurl=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fimage&docid=ExDvm63D_wCvSM&tbnid=2brKLR3s5kTpPM&vet=12ahUKEwjD-sfQlveJAxU0SaQEHWmHDDsQM3oFCIMBEAA..i&w=3000&h=2003&hcb=2&ved=2ahUKEwjD-sfQlveJAxU0SaQEHWmHDDsQM3oFCIMBEAA",
+        "https://staging.svgrepo.com/show/390455/user-person-account-avatar-profile-man.svg",
       validate(value) {
         if (!validator.isURL(value)) {
           throw new Error("Not  a url");
@@ -48,7 +48,7 @@ const userSchema = new mongoose.Schema(
     },
     about: {
       type: String,
-      default: "I am user of that website...",
+      default: "I am user of tinder website ...",
       minLength: 10,
       maxLength: 150,
     },
