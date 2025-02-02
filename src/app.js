@@ -28,8 +28,8 @@ app.use("/", userRouter);
 connectDb()
   .then(() => {
     console.log("Connection with database is established");
-    app.listen(7777, () => {
-      console.log("Server is listening on port 8888");
+    app.listen(8213, () => {
+      console.log("Server is listening on port 8213");
     });
   })
   .catch((error) => {
