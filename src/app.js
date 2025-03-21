@@ -11,12 +11,13 @@ const { profileRouter } = require("./routes/profile");
 const { requestRouter } = require("./routes/request");
 const { userRouter } = require("./routes/user");
 const cors = require("cors");
-
+const paymentRouter = require("./routes/payment");
+require("./utils/cronjob");
 app.use(
   cors({
     origin: "http://localhost:5173",
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"], // Allow GET method explicitly
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"], // Allow GET method explicitly
     allowedHeaders: ["Content-Type", "Authorization"], // Ensure necessary headers are allowed
   })
 );
@@ -28,7 +29,7 @@ app.use("/", authRouter);
 app.use("/", profileRouter);
 app.use("/", requestRouter);
 app.use("/", userRouter);
-
+app.use("/", paymentRouter);
 connectDb()
   .then(() => {
     console.log("Connection with database is established");
